@@ -53,7 +53,10 @@ To run this project, you need:
    Open and run the main script main.m to train and evaluate the model.
    
 ## 📝 Citation
+
 If you find this work useful for your research, please consider citing our paper:
+
+```bibtex
 @article{huang2024improved,
   title={An Improved Hybrid CNN-LSTM-Attention Model with Kepler Optimization Algorithm for Wind Speed Prediction},
   author={Huang, Yuesheng and Li, Jiawen and Li, Yushan and Lin, Routing and Wu, Jingru and Wang, Leijun and Chen, Rongjun},
