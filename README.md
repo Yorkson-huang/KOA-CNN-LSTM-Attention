@@ -1,60 +1,80 @@
-# An Improved Hybrid CNN-LSTM-Attention Model with Kepler Optimization Algorithm for Wind Speed Prediction
+﻿<h1 align="center">KOA-CNN-LSTM-Attention for Wind Speed Prediction</h1>
 
-![MATLAB](https://img.shields.io/badge/MATLAB-2023a-blue.svg) 
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-
-This repository contains the implementation of an improved hybrid model for wind speed prediction, combining **CNN**, **LSTM**, and **Attention mechanisms**, enhanced with the **Kepler Optimization Algorithm (KOA)**. The model is designed to improve the accuracy and robustness of wind speed forecasting.
-
----
-## 📧 Contact
-For any questions or collaborations, feel free to reach out at email: yorksonhuang@gmail.com
-Thank you for visiting this repository! 🌟
-## 📖 Overview
-
-Wind speed prediction is a critical task in renewable energy management. This project proposes an improved hybrid model that integrates:
-- **CNN**: For spatial feature extraction.
-- **LSTM**: For temporal sequence modeling.
-- **Attention Mechanism**: To focus on important features.
-- **Kepler Optimization Algorithm (KOA)**: To optimize the model's hyperparameters and enhance prediction performance.
-
-The model is implemented in **MATLAB 2023a** and is designed to be efficient and easy to use.
+<p align="center">
+  <a href="https://www.mathworks.com/products/matlab.html"><img src="https://img.shields.io/badge/MATLAB-2023a-blue.svg" alt="MATLAB"></a>
+  <img src="https://img.shields.io/badge/Python-3.10+-yellow.svg" alt="Python">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+  <a href="https://www.engineeringletters.com/issues_v32/issue_10/EL_32_10_14.pdf"><img src="https://img.shields.io/badge/Paper-Engineering%20Letters-8A2BE2.svg" alt="Paper"></a>
+</p>
 
 ---
 
-## 🚀 Key Features
-
-- **Hybrid Architecture**: Combines CNN, LSTM, and Attention mechanisms for robust feature extraction and sequence modeling.
-- **Kepler Optimization Algorithm (KOA)**: Enhances model performance by optimizing hyperparameters.
-- **MATLAB Implementation**: Easy to run and modify in MATLAB 2023a.
-- **Wind Speed Prediction**: Specifically designed for accurate and reliable wind speed forecasting.
-
----
-
-## 🛠️ Requirements
-
-To run this project, you need:
-- **MATLAB 2023a** (or later versions).
-- MATLAB Toolboxes: 
-  - Deep Learning Toolbox
-  - Optimization Toolbox
-  - Parallel Computing Toolbox (optional, for faster training)
+## Table of Contents
+- [Overview](#overview)
+- [MATLAB Implementation](#matlab-implementation)
+- [Python Port (Experimental)](#python-port-experimental)
+- [Dataset Structure](#dataset-structure)
+- [Citation](#citation)
+- [Contact](#contact)
 
 ---
 
-## 🏃‍♂️ How to Run
+## Overview
+This repository accompanies the paper "An Improved Hybrid CNN-LSTM-Attention Model with Kepler Optimization Algorithm for Wind Speed Prediction." The original implementation is provided in MATLAB and combines convolutional neural networks, LSTM layers, an attention mechanism, and the Kepler Optimization Algorithm (KOA) for wind speed forecasting.
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
-2. **Open MATLAB**:
-   Launch MATLAB 2023a and navigate to the project directory.
-3. **Run the Script**:
-   Open and run the main script main.m to train and evaluate the model.
-   
-## 📝 Citation
+---
 
-If you find this work useful for your research, please consider citing our paper:
+## MATLAB Implementation
+- **Core scripts:**
+  - `MAIN.m` - builds and trains the CNN-LSTM-Attention network.
+  - `objectiveFunction.m` - defines the loss used by KOA.
+  - `KOA.m` - implements the Kepler Optimization Algorithm.
+- **Requirements:** MATLAB 2023a (or later) with the Deep Learning Toolbox; the Optimization Toolbox is recommended for KOA experiments.
+- **How to run:**
+  1. Place the Excel dataset (e.g., `Data.xlsx`; legacy name `FeatureSequenceAndActual.xlsx`) in the project root.
+  2. Open MATLAB, change to this directory, and run `MAIN.m` for a single training run.
+  3. Run `KOA.m` to launch hyper-parameter optimization.
+
+> MATLAB scripts represent the authoritative version of the method described in the paper.
+
+---
+
+## Python Port (Experimental)
+A PyTorch-based port lives in the `python_impl/` folder. It mirrors the MATLAB workflow to support quick experimentation and scripting.
+
+- **Key files:**
+  - `main.py` - command-line entry point.
+  - `objective_function.py` - training loop equivalent to `objectiveFunction.m`.
+  - `koa.py` - KOA translated to Python.
+  - `model.py` - CNN-LSTM-Attention architecture.
+  - `data_utils.py` - Excel data loader.
+- **Setup:**
+  ```bash
+  pip install -r python_impl/requirements.txt
+  python -m python_impl.main --data-path python_impl/Data.xlsx
+  ```
+- **KOA example:**
+  ```bash
+  python -m python_impl.main \
+    --use-koa --agents 10 --iterations 30 \
+    --data-path python_impl/Data.xlsx
+  ```
+
+The Python version is provided for convenience and experimentation alongside the MATLAB code.
+
+---
+
+## Dataset Structure
+- Single worksheet; the used range contains 20 rows by 1801 columns.
+- Column A stores row labels:
+  - `feature1` ... `feature18` - 18 feature sequences.
+  - `target` - wind-speed ground truth.
+- Columns B through FZ (1,800 columns) are labelled `time1` ... `time1800`, representing 75 days x 24 hours (hourly resolution).
+
+---
+
+## Citation
+If you use this work, please cite the original paper:
 
 ```bibtex
 @article{huang2024improved,
@@ -67,3 +87,13 @@ If you find this work useful for your research, please consider citing our paper
   year={2024},
   publisher={IAENG}
 }
+```
+
+---
+
+## Contact
+For questions or collaborations, reach out to **yorksonhuang@gmail.com**.
+
+---
+
+<p align="center">Made with love for wind energy research.</p>
